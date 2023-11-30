@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.schoolFllow.Mapper.ActivityMapper">
+    <select id="selectByName" resultType="com.schoolFllow.Domain.Entity.Activity">
+        select * from activity where ac_title like   concat('%', #{name}, '%');
+    </select>
+    <select id="selectAll"  resultType="com.schoolFllow.Domain.Entity.Activity">
+        select * from activity;
+    </select>
+    <select id="searchByTitleAndId" resultType="com.schoolFllow.Domain.Entity.Activity">
+        select * from activity where activity.ac_title like concat('%',#{acTitle},'%') and activity.alu_id=#{aluid}
+    </select>
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.schoolFllow.Mapper.AlumniMapper">
+    <select id="selectByNameAndPassword" resultType="com.schoolFllow.Domain.Entity.Alumni">
+        select * from Alumni where name=#{Name} and password=#{password}
+    </select>
+    <select id="selectAll"  resultType="com.schoolFllow.Domain.Entity.Alumni">
+        select * from Alumni;
+    </select>
+    <select id="queryAcByAlumniMain" resultType="Activity">
+        select * from activity group by alu_id having  alu_id=#{masterId}
+    </select>
+    <select id="queryActivity" resultType="Activity">
+        select activity.ac_id from activity,activity_join where activity_join.alumni_id=#{aluId}
+    </select>
+    <select id="searchByNameAndPhone" resultType="com.schoolFllow.Domain.Entity.Alumni">
+           select * from Alumni where name like   concat('%', #{Name}, '%') and mobile like   concat('%', #{phone}, '%')
+    </select>
+    <select id="searchIdByName" resultType="Integer" >
+        select id from Alumni where name like concat('%', #{Name}, '%')
+    </select>
+</mapper>

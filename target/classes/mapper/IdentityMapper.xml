@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.schoolFllow.Mapper.IdentityMapper">
+    <select id="selectFunctionByIdentityIdS" resultType="Function">
+        SELECT
+        f.id,
+        f.name,
+        f.parent_id,
+        f.perms,
+        f.menu_type
+        FROM identity i
+        LEFT JOIN identity_function ifu ON i.id = ifu.identity_id
+        LEFT JOIN `function` f ON f.id = ifu.function_id
+        WHERE i.id IN
+        <foreach item="id" index="index" collection="Ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+</mapper>
